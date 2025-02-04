@@ -31,7 +31,7 @@ public class C02_BeforeAfterAnnotations {
         driver.close();
     }
 
-    @Test @Ignore
+    @Test
     public void test01(){
         driver.get("https://www.amazon.com");
     }
