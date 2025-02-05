@@ -4,11 +4,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
+import java.util.List;
 
 public class Case_01 {
     /*
@@ -125,6 +128,62 @@ public class Case_01 {
 
         driver.findElement(By.xpath("//a[text()='Continue']")).click();
 
+    }
+
+    @Test
+    public void test2(){
+        WebDriverManager.chromedriver().setup();
+
+        WebDriver driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+
+
+        driver.get("https://www.automationexercise.com/login");
+
+        WebElement nameElement = driver.findElement(By.xpath("//input[@data-qa='signup-name']"));
+
+        Actions actions = new Actions(driver);
+        actions
+                .sendKeys(nameElement, "Burak")
+                .sendKeys(Keys.TAB)
+                .sendKeys("asdf@asdfg")
+                .perform();
+
+
+    }
+
+    @Test
+    public void test3(){
+
+        WebDriverManager.chromedriver().setup();
+
+        WebDriver driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+
+        Actions actions = new Actions(driver);
+
+        driver.get("https://www.automationexercise.com/");
+
+        WebElement productsElement = driver.findElement(By.xpath("//*[text()=' Products']"));
+
+        actions.click(productsElement).perform();
+
+        List<WebElement> webElements = driver.findElements(By.xpath("//*[text()='View Product']"));
+
+        actions.scrollToElement(webElements.get(4));
+
+       actions.click(webElements.get(0)).perform();
+
+       WebElement txtElement = driver.findElement(By.xpath("//*[text()='Blue Top']"));
+       Assert.assertTrue(txtElement.isDisplayed());
+
+       driver.close();
 
     }
 
