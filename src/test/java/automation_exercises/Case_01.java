@@ -36,6 +36,7 @@ public class Case_01 {
         18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
      */
 
+
     @Test
     public void test() {
         WebDriverManager.chromedriver().setup();
